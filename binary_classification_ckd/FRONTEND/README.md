@@ -174,7 +174,6 @@ const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 ### For UI Development
 1. Check `src/components/common/Header.tsx` for component structure
 2. Review `src/components/features/ClinicalForm.tsx` for complex components
-3. Use `QUICK_REFERENCE.md` for styling patterns
 
 ### For State Management
 1. Study `src/hooks/useFormData.ts` for form patterns
@@ -189,7 +188,6 @@ const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 ### For TypeScript
 1. Review `src/types/index.ts` for type definitions
 2. Check component files for interface usage
-3. See `TYPESCRIPT_COMPLIANCE.md` for patterns
 
 ## 🎓 Best Practices Used
 
@@ -225,7 +223,6 @@ npm run build
 2. Add types to `src/types/index.ts`
 3. Create hooks if needed in `src/hooks/`
 4. Use in `App.tsx`
-5. Update `QUICK_REFERENCE.md` with examples
 
 ### Code Style
 - Use TypeScript for all files

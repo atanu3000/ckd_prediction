@@ -1,46 +1,29 @@
-# CKD Binary Classification Flask Server
+# Binary Classification (CKD) — Module Overview
 
-This repository contains a small Flask server that trains a binary classifier on `kidney_disease.csv` (if present) and exposes a simple prediction API.
+This module contains the tabular CKD prediction experiments and a small demo application for serving model predictions locally. It is split into two main parts: a small server for model inference and a frontend app for interactive demos.
 
-Files added:
+Module map
 
-- `SERVER/app.py` — Flask server with endpoints:
-  - `GET /` - simple placeholder UI for manual testing
-  - `POST /train` - trains a model from `kidney_disease.csv` (expected at project root) and saves it to `SERVER/model.pkl`
-  - `POST /predict` - accepts JSON with `data` (object or list of objects) and returns predictions
-  - `GET /health` - basic health check
-- `requirements.txt` — Python dependencies
+- `SERVER/` — Python demo server and inference utilities. See `SERVER/README.md` for conceptual details and quick-start instructions.
+- `FRONTEND/` — React + TypeScript demo UI that calls the server to display predictions and AI insights. See `FRONTEND/README.md` inside the folder for full frontend documentation and commands.
 
-Quick start
+Purpose and recommended workflow
 
-1. Create and activate a Python virtual environment (recommended):
+1. Train or obtain a tabular CKD model (keep large artifacts out of the repo).
+2. Place or configure the model path so the `SERVER` can load it for inference.
+3. Run the `SERVER` locally and use the `FRONTEND` to send sample inputs and view results.
 
-```powershell
-python -m venv .venv; .\.venv\Scripts\Activate.ps1
-```
+Quick links
 
-2. Install dependencies:
+- `binary_classification_ckd/SERVER/README.md` — server conceptual README and quick-start
+- `binary_classification_ckd/FRONTEND/README.md` — frontend project README with structure, commands, and deployment notes
 
-```powershell
-pip install -r requirements.txt
-```
+Security & data handling
 
-3. Run the server:
+- Do not commit patient data or PHI. Use external secure storage for datasets and list only data pointers or small samples in the repo.
+- Add `.gitignore` entries for model files, checkpoints, and environment files.
 
-```powershell
-python SERVER\app.py
-```
+If you want, I can:
+- Add a `sample_input.json` and example `curl`/PowerShell command to call the server, or
+- Commit these READMEs and create a small `DATA.md` template describing dataset placement.
 
-4. In a browser open `http://localhost:5000/` to use the small test UI, or call the endpoints directly (`/train`, `/predict`).
-
-Notes
-
-- The training code tries to find a label column (`class`, `target`, etc.) or falls back to the last column in the CSV.
-- The server will attempt to train on startup if no saved model is found.
-- The UI is a placeholder. You can replace it later with a real front-end.
-
-Next steps
-
-- Add a proper UI (React/Vue) that calls `/predict`.
-- Harden input validation and schema checks.
-- Add unit tests for the prediction logic.
