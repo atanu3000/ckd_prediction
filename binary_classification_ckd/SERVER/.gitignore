@@ -1,0 +1,94 @@
+# Common Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Byte-compiled / optimized / DLL files
+# (these are usually created by Python and should not be committed)
+
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# PyCharm / IntelliJ
+.idea/
+
+# VS Code
+.vscode/
+
+# MacOS / Windows
+.DS_Store
+Thumbs.db
+
+# Mypy cache
+.mypy_cache/
+
+# pyright
+.pyrightconfig/*
+
+# Editor temporary files
+*~
+*.swp
+
+# SQLite DB files (if used for local dev)
+*.sqlite3
+
+# Logs and runtime files
+logs/
+*.log
+runtime/
+tmp/
+temp/
+
+# Local secrets and environment variables
+.env
+.venv.env
+env.local
+secrets.json
+instance/
+
+# Large data, models and uploads (do NOT commit large binaries)
+data/
+datasets/
+models/
+*.h5
+*.pt
+*.pth
+*.ckpt
+uploads/
+
+# Common Python IDE / tooling folders
+.ropeproject/
+.pytest_cache/
+
+# Coverage and report outputs
+coverage/
+
+# Ignore compiled static assets (if any front-end exists in server)
+staticfiles/
+node_modules/
+
+# Allow placing a .gitkeep file to force-track an otherwise-empty folder
+!**/.gitkeep
+
