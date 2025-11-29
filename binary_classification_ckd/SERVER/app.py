@@ -58,7 +58,11 @@ def features():
 
 	# If model artifact is a dict with metadata
 	if isinstance(MODEL_ARTIFACT, dict) and "feature_columns" in MODEL_ARTIFACT:
-		return jsonify({"features": MODEL_ARTIFACT["feature_columns"]})
+		return jsonify({
+      		"model_name": MODEL_ARTIFACT.get("model_name", None), 
+        	"features": MODEL_ARTIFACT.get("feature_columns", None), 
+         	"target": MODEL_ARTIFACT.get("target_col", None)
+        }), 200
 
 	# If it's a pipeline, we may not have explicit feature names
 	return jsonify({"message": "Feature names not available in model artifact. Provide a sample JSON to /predict or save model with feature metadata."}), 200
@@ -66,68 +70,25 @@ def features():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-	"""Accept JSON with key 'data' containing a single object or a list of objects representing feature values.
-
-	Example:
-	  {"data": {"age": 45, "bp": 80, ...}}
-	or
-	  {"data": [{...}, {...}]}
-	"""
-	global MODEL_ARTIFACT
+	"""Accept JSON with key 'data' containing a single object or a list of objects."""
 	if MODEL_ARTIFACT is None:
-		return jsonify({"error": "Model not loaded. Please ensure trained_ckd_model.pkl is present in SERVER/"}), 400
+		return jsonify({"error": "Model not loaded"}), 400
 
 	payload = request.get_json(silent=True)
 	if not payload or "data" not in payload:
-		return jsonify({"error": "JSON body must contain 'data' key with object or list of objects"}), 400
+		return jsonify({"error": "JSON body must contain 'data' key"}), 400
 
 	data = payload["data"]
-	single = False
 	if isinstance(data, dict):
 		data = [data]
-		single = True
-
+		data = [data]
 	try:
 		df = pd.DataFrame(data)
-	except Exception as e:
-		return jsonify({"error": f"Failed to convert input to DataFrame: {e}"}), 400
-
-	# If artifact contains feature_columns, ensure DataFrame has those columns (create missing with NaN)
-	if isinstance(MODEL_ARTIFACT, dict) and "feature_columns" in MODEL_ARTIFACT:
-		expected = MODEL_ARTIFACT["feature_columns"]
-		for col in expected:
-			if col not in df.columns:
-				df[col] = pd.NA
-		df = df[expected]
-
-	# Determine prediction pipeline/object
-	model_obj = None
-	if isinstance(MODEL_ARTIFACT, dict) and "pipeline" in MODEL_ARTIFACT:
-		model_obj = MODEL_ARTIFACT["pipeline"]
-	else:
-		model_obj = MODEL_ARTIFACT
-
-	try:
+		model_obj = MODEL_ARTIFACT.get("model", None) if isinstance(MODEL_ARTIFACT, dict) else MODEL_ARTIFACT
 		preds = model_obj.predict(df)
+		return jsonify({"predictions": preds.tolist()})
 	except Exception as e:
-		return jsonify({"error": f"Prediction failed: {e}"}), 500
-
-	result = {"predictions": preds.tolist()}
-
-	# Add probabilities if available
-	try:
-		if hasattr(model_obj, "predict_proba"):
-			proba = model_obj.predict_proba(df).tolist()
-			result["probabilities"] = proba
-	except Exception:
-		# ignore probability errors
-		pass
-
-	if single:
-		# unwrap single-result lists
-		result = {k: (v[0] if isinstance(v, list) and len(v) > 0 else v) for k, v in result.items()}
-
-	return jsonify(result)
+		return jsonify({"error": str(e)}), 400
 
 
 if __name__ == "__main__":

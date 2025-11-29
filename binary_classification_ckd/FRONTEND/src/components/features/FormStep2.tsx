@@ -11,28 +11,29 @@ const FormStep2: React.FC<FormStep2Props> = ({ formData, onChange }) => {
   return (
     <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <InputGroup
-        label="Blood Glucose (Random)"
-        name="bloodGlucose"
-        value={formData.bloodGlucose}
+        label="Pus Cell Clumps (Present)"
+        name="pus_cell_clumps_present"
+        value={formData.pus_cell_clumps_present}
         onChange={onChange}
-        placeholder="e.g. 120"
-        unit="mgs/dl"
+        placeholder="0 or 1"
+        unit="binary"
+        info="Binary flag: 1 if clumps are present in urine sample, 0 otherwise."
       />
       <InputGroup
         label="Blood Urea"
-        name="bloodUrea"
-        value={formData.bloodUrea}
+        name="blood_urea"
+        value={formData.blood_urea}
         onChange={onChange}
         placeholder="e.g. 36"
-        unit="mgs/dl"
+        unit="mg/dL"
       />
       <InputGroup
         label="Serum Creatinine"
-        name="serumCreatinine"
-        value={formData.serumCreatinine}
+        name="serum_creatinine"
+        value={formData.serum_creatinine}
         onChange={onChange}
         placeholder="e.g. 1.2"
-        unit="mgs/dl"
+        unit="mg/dL"
       />
       <InputGroup
         label="Sodium"
@@ -41,6 +42,23 @@ const FormStep2: React.FC<FormStep2Props> = ({ formData, onChange }) => {
         onChange={onChange}
         placeholder="e.g. 137"
         unit="mEq/L"
+      />
+      <InputGroup
+        label="Hemoglobin"
+        name="hemoglobin"
+        value={formData.hemoglobin}
+        onChange={onChange}
+        placeholder="e.g. 14.0"
+        unit="g/dL"
+      />
+      <InputGroup
+        label="Packed Cell Volume"
+        name="packed_cell_volume"
+        value={formData.packed_cell_volume}
+        onChange={onChange}
+        placeholder="e.g. 42"
+        unit="%"
+        info="Proportion of blood made up of red cells; used to check anemia."
       />
     </form>
   );

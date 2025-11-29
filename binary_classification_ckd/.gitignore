@@ -4,3 +4,6 @@
 *.docx
 *.pptx
 *.tmp
+*ipynb_checkpoints/
+*.vscode/
+*.ipynb

@@ -3,18 +3,24 @@
  */
 
 export interface PatientFormData {
-  age: string;
-  bloodPressure: string;
-  specificGravity: string;
+  blood_pressure: string;
+  specific_gravity: string;
   albumin: string;
-  bloodGlucose: string;
-  bloodUrea: string;
-  serumCreatinine: string;
+  pus_cell: string;
+  blood_glucose_random: string;
+  blood_urea: string;
+  serum_creatinine: string;
   sodium: string;
-  potassium: string;
   hemoglobin: string;
-  packedCellVolume: string;
-  redBloodCellCount: string;
+  packed_cell_volume: string;
+  red_blood_cell_count: string;
+  hypertension: string;
+  diabetes_mellitus: string;
+  appetite: string;
+  pedal_edema: string;
+  anemia: string;
+  pus_cell_clumps_notpresent: string;
+  pus_cell_clumps_present: string;
 }
 
 export type CKDRiskResult = 'risk' | 'safe' | null;

@@ -3,18 +3,24 @@
  */
 
 export const INITIAL_FORM_DATA = {
-  age: '',
-  bloodPressure: '',
-  specificGravity: '',
+  blood_pressure: '',
+  specific_gravity: '',
   albumin: '',
-  bloodGlucose: '',
-  bloodUrea: '',
-  serumCreatinine: '',
+  pus_cell: '',
+  blood_glucose_random: '',
+  blood_urea: '',
+  serum_creatinine: '',
   sodium: '',
-  potassium: '',
   hemoglobin: '',
-  packedCellVolume: '',
-  redBloodCellCount: '',
+  packed_cell_volume: '',
+  red_blood_cell_count: '',
+  hypertension: '',
+  diabetes_mellitus: '',
+  appetite: '',
+  pedal_edema: '',
+  anemia: '',
+  pus_cell_clumps_notpresent: '',
+  pus_cell_clumps_present: '',
 };
 
 export const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';

@@ -17,6 +17,7 @@ Quick links
 
 - `binary_classification_ckd/SERVER/README.md` — server conceptual README and quick-start
 - `binary_classification_ckd/FRONTEND/README.md` — frontend project README with structure, commands, and deployment notes
+- Colab notebook: [`👉 visit`](https://colab.research.google.com/drive/1qIEfY9qpN7Bc1G-7NS_f93JWUl1jl2lL?usp=sharing)
 
 Security & data handling
 
